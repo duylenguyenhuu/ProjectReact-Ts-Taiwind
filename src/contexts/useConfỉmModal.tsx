@@ -1,4 +1,4 @@
-import { Box, Button, Modal, SxProps, Typography } from "@mui/material";
+import { Box, Button, Modal, Typography } from "@mui/material";
 import { ReactNode, createContext, useContext, useState } from "react";
 
 interface IConfirmModalContextProps {
@@ -53,7 +53,6 @@ export const ConfirmModalContextProvider = ({
   const handleClose = () => {
     setOpen(false);
   };
-
   return (
     <ModalContext.Provider value={{ showConfirmModal }}>
       {children}
