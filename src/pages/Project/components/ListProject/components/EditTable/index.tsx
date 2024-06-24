@@ -1,10 +1,9 @@
 import { Box } from "@mui/material";
-import { useProjectReducer } from "../../../../reducers/ProjectReducer";
+import { useProjectContext } from "../../../../contexts/ProjectContext";
 
 export const EditTables = () => {
-  const [state] = useProjectReducer();
+  const { currentProject } = useProjectContext();
 
-  console.log(state);
-
-  return <Box>hedsfdsf sdfsdf sdf sdf sd f sd f sd llo</Box>;
+  console.log(currentProject);
+  return <Box>edit project</Box>;
 };

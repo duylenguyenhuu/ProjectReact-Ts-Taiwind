@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useConfirmModal } from "../../../../../../contexts/useConfỉmModal";
 import { IProject } from "../../../../../../interfaces/IProject";
 import { fetchTableAPI } from "../../../../../../utlis/api-services/projectServices";
-import { useProjectReducer } from "../../../../reducers/ProjectReducer";
+import { useProjectContext } from "../../../../contexts/ProjectContext";
 
 export type IPaging = {
   page: number;
@@ -14,19 +14,19 @@ export type IPaging = {
 };
 
 const List = () => {
-  const [state, dispatch] = useProjectReducer();
   const navigate = useNavigate();
-  const [data, setData] = useState<IProject[]>([]);
   const { showConfirmModal } = useConfirmModal();
   const [paging, setPaging] = useState<IPaging>({
     page: 1,
     pageSize: 10,
     total: 0,
   });
+  const { projectList, setProjectList, setCurrentProject } =
+    useProjectContext();
 
   useEffect(() => {
     fetchTableAPI().then((data) => {
-      setData(data);
+      setProjectList?.(data);
       handleChangePaging({ total: data?.length });
     });
   }, []);
@@ -72,7 +72,9 @@ const List = () => {
   ];
 
   const handleChangeDelete = (params: GridRenderCellParams) => {
-    setData((prev) => prev.filter((item) => item.id !== params?.row?.id));
+    setProjectList?.((prev) =>
+      prev.filter((item) => item.id !== params?.row?.id)
+    );
     setPaging((prev) => ({ ...prev, total: prev.total - 1 }));
   };
 
@@ -80,18 +82,15 @@ const List = () => {
     setPaging((prev) => ({ ...prev, ...partialPaging }));
   };
 
-  const dataInTable = data.slice(
+  const dataInTable = projectList?.slice(
     (paging.page - 1) * paging.pageSize,
     paging.page * paging.pageSize
   );
 
   const handleGoEdit = (prj: IProject) => {
-    console.log(prj);
-    dispatch({ type: "setProject", payload: { project: prj } });
+    setCurrentProject?.(prj);
     navigate(`${prj.id}`);
   };
-
-  console.log(state);
 
   return (
     <>
