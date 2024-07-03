@@ -113,8 +113,10 @@ export const EditTables = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid xs={12} sm={6} item>
-          <Button onClick={() => handlesSave(currentProject)}>edit</Button>
+        <Grid container spacing={2}>
+          <Grid className="flex justify-end" xs={12} sm={6} item>
+            <Button onClick={() => handlesSave(currentProject)}>edit</Button>
+          </Grid>
         </Grid>
       </Panel>
     </Box>

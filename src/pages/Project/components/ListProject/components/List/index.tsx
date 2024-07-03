@@ -92,6 +92,8 @@ const List = () => {
     navigate(`${prj.id}`);
   };
 
+  console.log({ projectList });
+
   return (
     <>
       <Box
