@@ -81,7 +81,6 @@ export default function PersistentDrawerLeft({
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
