@@ -2,15 +2,18 @@ import "./App.css";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./themes/them";
 import RoutesContainer from "./routes";
-import { ConfirmModalContextProvider } from "./contexts/useConfỉmModal";
+import { ConfirmModalContextProvider } from "./contexts/useConfirmModal";
+import { SnackbarContextProvider } from "./contexts/useSnackbar";
 
 function App() {
   return (
-    <ConfirmModalContextProvider>
-      <ThemeProvider theme={theme}>
-        <RoutesContainer />
-      </ThemeProvider>
-    </ConfirmModalContextProvider>
+    <ThemeProvider theme={theme}>
+      <ConfirmModalContextProvider>
+        <SnackbarContextProvider>
+          <RoutesContainer />
+        </SnackbarContextProvider>
+      </ConfirmModalContextProvider>
+    </ThemeProvider>
   );
 }
 

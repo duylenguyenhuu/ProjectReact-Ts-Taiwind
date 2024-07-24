@@ -4,11 +4,15 @@ import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import Panel from "../../../../../../components/Panel";
 import { ReactNode } from "react";
 import { IProject } from "../../../../../../interfaces/IProject";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 export const EditTables = () => {
   const navigate = useNavigate();
   const { currentProject, setCurrentProject, setProjectList } =
     useProjectContext();
+
+  const [searchParams] = useSearchParams();
+  const searchParamsOject = Object.fromEntries([...searchParams]);
+  console.log(searchParamsOject);
 
   const handleChange = (field: string, value: ReactNode) => {
     setCurrentProject?.((prev) => ({ ...prev, [field]: value }));
